@@ -23,7 +23,21 @@ public class ApplyForces : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        collision.transform.position += Vector3.down;   
+     S1 ObjectHitHealth =  collision.gameObject.GetComponent<S1>();
+
+        if (ObjectHitHealth)
+        {
+            print("found health script in object hit");
+            ObjectHitHealth.takeDamage(20);
+
+            int ObjectMaxHealth = ObjectHitHealth.whatsYourMaxHealth();
+            if (ObjectMaxHealth > 100)
+                ObjectHitHealth.takeDamage(100);
+        }
+        else
+        {
+            print("Did not find health script in object hit");
+        }
     }
 }
 
